@@ -81,8 +81,7 @@ class ViewController: UIViewController {
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
         annotationArray = [MKPointAnnotation]()
-        resetButton.isHidden = true
-        routeButton.isHidden = true
+       
     }
     
     private func setupPlaceMark(placeAddress: String){
