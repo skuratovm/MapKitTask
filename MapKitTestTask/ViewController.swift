@@ -12,9 +12,9 @@ import CoreLocation
 class ViewController: UIViewController {
     let addAddressButton: UIButton = {
           let button = UIButton()
-          button.setTitle("Add address", for: .normal)
+          button.setTitle("Add", for: .normal)
           button.translatesAutoresizingMaskIntoConstraints = false
-          button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 50
           button.layer.borderWidth = 1
           button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor =  #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
           let button = UIButton()
           button.setTitle("Route", for: .normal)
           button.translatesAutoresizingMaskIntoConstraints = false
-          button.layer.cornerRadius = 5
+          button.layer.cornerRadius = 50
           button.layer.borderWidth = 1
           button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
@@ -36,12 +36,15 @@ class ViewController: UIViewController {
       let resetButton: UIButton = {
           let button = UIButton()
           button.setTitle("Reset", for: .normal)
+        button.layer.cornerRadius = 30
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.setTitleColor(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), for: .normal)
           button.translatesAutoresizingMaskIntoConstraints = false
-          button.layer.cornerRadius = 5
-          button.layer.borderWidth = 1
+        
         button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.layer.borderColor =  #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+       
         button.isHidden = true
           return button
       }()
@@ -61,6 +64,7 @@ class ViewController: UIViewController {
         addAddressButton.addTarget(self, action: #selector(addAddressButtonTapped), for: .touchUpInside)
         routeButton.addTarget(self, action: #selector(routeButtonTapped), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+        mapView.delegate = self
     }
     @objc func addAddressButtonTapped(){
         AlertAddAddress(title: "Add point", placeholder: "Enter address") { [self](text ) in
@@ -68,10 +72,17 @@ class ViewController: UIViewController {
         }
     }
     @objc func routeButtonTapped(){
-        print("ll")
+        for index in 0...annotationArray.count - 2{
+            createTheRoute(startCoord: annotationArray[index].coordinate, destinationCoord: annotationArray[index + 1].coordinate)
+        }
+        mapView.showAnnotations(annotationArray, animated: true)
     }
     @objc func resetButtonTapped(){
-        
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
+        annotationArray = [MKPointAnnotation]()
+        resetButton.isHidden = true
+        routeButton.isHidden = true
     }
     
     private func setupPlaceMark(placeAddress: String){
@@ -87,14 +98,15 @@ class ViewController: UIViewController {
             
             guard let placemarks = placemarks  else {return}
             let placemark = placemarks.first
+            guard let placemarkLocation = placemark?.location else {return}
             
             let annotation = MKPointAnnotation()
             annotation.title = "\(placeAddress)"
-            guard let placemarkLocation = placemark?.location else {return}
+            
             annotation.coordinate = placemarkLocation.coordinate
             annotationArray.append(annotation)
             
-            if annotationArray.count > 0{
+            if annotationArray.count > 1{
                 routeButton.isHidden = false
                 resetButton.isHidden = false
             }
@@ -103,10 +115,51 @@ class ViewController: UIViewController {
         }
     }
     
+    private func createTheRoute(startCoord: CLLocationCoordinate2D, destinationCoord: CLLocationCoordinate2D){
+        
+        let startLocation = MKPlacemark(coordinate: startCoord)
+        let destinateLocation = MKPlacemark(coordinate: destinationCoord)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startLocation)
+        request.destination = MKMapItem(placemark: destinateLocation)
+        
+        request.transportType = .walking
+        request.requestsAlternateRoutes = true
+        
+        let direction = MKDirections(request: request)
+        direction.calculate { (response, error) in
+            if let error = error {
+                print(error)
+                return
+                
+            }
+            
+            guard let response = response else {
+                self.errorAlert(title: "Error", message:" Unable to create the route")
+                return
+            }
+            var minRoute = response.routes[0]
+            for route in response.routes{
+                minRoute = (route.distance < minRoute.distance) ? route : minRoute
+            }
+            self.mapView.addOverlay(minRoute.polyline)
+        }
+        
+    }
+    
    
     
   
 
+}
+
+extension ViewController: MKMapViewDelegate{
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let rendered = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        rendered.strokeColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        return rendered
+    }
 }
 
 extension ViewController{
@@ -124,8 +177,8 @@ extension ViewController{
         NSLayoutConstraint.activate([
             addAddressButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -25),
             addAddressButton.leadingAnchor.constraint(equalTo: mapView.leadingAnchor,constant: 5),
-            addAddressButton.heightAnchor.constraint(equalToConstant: 50),
-            addAddressButton.widthAnchor.constraint(equalToConstant: 170)
+            addAddressButton.heightAnchor.constraint(equalToConstant: 100),
+            addAddressButton.widthAnchor.constraint(equalToConstant: 100)
             
             
         ])
@@ -133,15 +186,15 @@ extension ViewController{
         NSLayoutConstraint.activate([
             routeButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -25),
             routeButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -5),
-            routeButton.heightAnchor.constraint(equalToConstant: 50),
-            routeButton.widthAnchor.constraint(equalToConstant: 170)
+            routeButton.heightAnchor.constraint(equalToConstant: 100),
+            routeButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         mapView.addSubview(resetButton)
         NSLayoutConstraint.activate([
             resetButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 40),
             resetButton.centerXAnchor.constraint(equalTo: mapView.centerXAnchor, constant: 0.0),
-            resetButton.heightAnchor.constraint(equalToConstant: 40),
-            resetButton.widthAnchor.constraint(equalToConstant: 120)
+            resetButton.heightAnchor.constraint(equalToConstant: 60),
+            resetButton.widthAnchor.constraint(equalToConstant: 60)
             
         ])
     }
