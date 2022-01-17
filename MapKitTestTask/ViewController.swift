@@ -321,7 +321,7 @@ extension ViewController: CLLocationManagerDelegate {
             let speechUtterance = AVSpeechUtterance(string: message)
             speechSynthesizer.speak(speechUtterance)
         } else {
-            let message = "Arrived at destination"
+            let message = "Вы прибыли"
             directionsLabel.text = message
             let speechUtterance = AVSpeechUtterance(string: message)
             speechSynthesizer.speak(speechUtterance)

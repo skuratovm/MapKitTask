@@ -13,13 +13,13 @@ extension UIViewController{
         alertConroller.addTextField { (tf) in
             tf.placeholder  = placeholder
         }
-        let addAddressAction = UIAlertAction(title: "Add ", style: .default) { (action) in
+        let addAddressAction = UIAlertAction(title: "Поехали ", style: .default) { (action) in
             let tfText = alertConroller.textFields?.first
             guard let text = tfText?.text else {return}
             completionHandler(text )
         }
         
-        let cencelAction = UIAlertAction(title: "Cencel", style: .cancel) { (_) in
+        let cencelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
         }
         
         alertConroller.addAction(addAddressAction)
