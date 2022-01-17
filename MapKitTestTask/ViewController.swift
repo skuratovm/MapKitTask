@@ -8,27 +8,58 @@
 import UIKit
 import MapKit
 import CoreLocation
+import AVFoundation
 
 class ViewController: UIViewController {
+    var isMove = false
+    
+   
     let addAddressButton: UIButton = {
           let button = UIButton()
-          button.setTitle("Add", for: .normal)
+          //button.setTitle("Add", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "point-1984772-1677550.png"), for: .normal)
+        button.imageEdgeInsets.left = 25
+        button.imageEdgeInsets.right = 25
+        button.imageEdgeInsets.bottom = 25
+        button.imageEdgeInsets.top = 25
           button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 50
+        button.layer.cornerRadius = 27
           button.layer.borderWidth = 1
           button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        button.backgroundColor =  #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
           return button
       }()
+    
+    let menuButton: UIButton = {
+         let button = UIButton()
+       // button.setTitle(" ^ ", for: .normal)
+        
+        button.setImage(#imageLiteral(resourceName: "up-chevron-458462.png"), for: .normal)
+        button.imageEdgeInsets.left = 35
+        button.imageEdgeInsets.right = 35
+        button.imageEdgeInsets.bottom = 9
+        button.imageEdgeInsets.top = 9
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor =  #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        button.backgroundColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        return button
+    }()
       
       let routeButton: UIButton = {
           let button = UIButton()
-          button.setTitle("Route", for: .normal)
+          //button.setTitle("Route", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "route-2459472-2139747.png"), for: .normal)
+        button.imageEdgeInsets.left = 23
+        button.imageEdgeInsets.right = 23
+        button.imageEdgeInsets.bottom = 23
+        button.imageEdgeInsets.top = 23
           button.translatesAutoresizingMaskIntoConstraints = false
-          button.layer.cornerRadius = 50
+          button.layer.cornerRadius = 27
           button.layer.borderWidth = 1
           button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        button.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         button.isHidden = true
           return button
       }()
@@ -51,6 +82,9 @@ class ViewController: UIViewController {
     let mapView: MKMapView = {
            let mapView = MKMapView()
            mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.layer.cornerRadius = 41
+        mapView.layer.borderWidth = 1
+        mapView.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
            return mapView
            
        }()
@@ -59,11 +93,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.9743027091, green: 0.9609521031, blue: 0.9301842451, alpha: 1)
        setConstraints()
         addAddressButton.addTarget(self, action: #selector(addAddressButtonTapped), for: .touchUpInside)
         routeButton.addTarget(self, action: #selector(routeButtonTapped), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         mapView.delegate = self
+    }
+    @objc func menuButtonTapped(){
+        toggleMenu()
     }
     @objc func addAddressButtonTapped(){
         AlertAddAddress(title: "Add point", placeholder: "Enter address") { [self](text ) in
@@ -82,6 +121,49 @@ class ViewController: UIViewController {
         annotationArray = [MKPointAnnotation]()
         resetButton.isHidden = true
         routeButton.isHidden = true
+    }
+    func showMenuViewController(shouldMove: Bool) {
+        if shouldMove {
+            // показываем menu
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut,
+                           animations: {
+                            self.mapView.frame.origin.y = self.mapView.frame.origin.y - 130
+                            //self.menuButton.setImage(#imageLiteral(resourceName: "down-chevron-458459.png"), for: .normal)
+            }) { (finished) in
+                
+            }
+        } else {
+            // убираем menu
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut,
+                           animations: {
+                            self.mapView.frame.origin.y = 0
+                            //self.menuButton.setImage(#imageLiteral(resourceName: "up-chevron-458462.png"), for: .normal)
+            }) { (finished) in
+    
+//                self.menuViewController.willMove(toParent: nil)
+//                self.menuViewController.view.removeFromSuperview()
+//                self.menuViewController.removeFromParent()
+                //self.menuViewController.remove()
+                print("Удалили menuViewController")
+            }
+        }
+    }
+    
+    func toggleMenu() {
+        
+        if !isMove {
+            //configureMenuViewController()
+        }
+        isMove = !isMove
+        showMenuViewController(shouldMove: isMove)
     }
     
     private func setupPlaceMark(placeAddress: String){
@@ -154,10 +236,33 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: MKMapViewDelegate{
+//    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        let rendered = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+//        rendered.strokeColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+//        return rendered
+//    }
+//    if overlay is MKCircle {
+//        let renderer = MKCircleRenderer(overlay: overlay)
+//        renderer.strokeColor = .red
+//        renderer.fillColor = .red
+//        renderer.alpha = 0.5
+//        return renderer
+//    }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let rendered = MKPolylineRenderer(overlay: overlay as! MKPolyline)
-        rendered.strokeColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-        return rendered
+        if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+            renderer.lineWidth = 10
+            return renderer
+        }
+        if overlay is MKCircle {
+            let renderer = MKCircleRenderer(overlay: overlay)
+            renderer.strokeColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+            renderer.fillColor = .red
+            renderer.alpha = 0.5
+            return renderer
+        }
+        return MKOverlayRenderer()
     }
 }
 
@@ -172,23 +277,31 @@ extension ViewController{
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
         ])
         
-        mapView.addSubview(addAddressButton)
+        view.insertSubview(addAddressButton, at: 0)
         NSLayoutConstraint.activate([
             addAddressButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -25),
             addAddressButton.leadingAnchor.constraint(equalTo: mapView.leadingAnchor,constant: 5),
-            addAddressButton.heightAnchor.constraint(equalToConstant: 100),
-            addAddressButton.widthAnchor.constraint(equalToConstant: 100)
+            addAddressButton.heightAnchor.constraint(equalToConstant: 90),
+            addAddressButton.widthAnchor.constraint(equalToConstant: 90)
             
             
         ])
-        mapView.addSubview(routeButton)
+        mapView.addSubview(menuButton)
+        NSLayoutConstraint.activate([
+            menuButton.heightAnchor.constraint(equalToConstant: 43),
+            menuButton.widthAnchor.constraint(equalToConstant: 150),
+            menuButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -15),
+            menuButton.centerXAnchor.constraint(equalTo: mapView.centerXAnchor, constant: 0.0)
+        ])
+        
+        view.insertSubview(routeButton, at: 0)
         NSLayoutConstraint.activate([
             routeButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -25),
             routeButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -5),
-            routeButton.heightAnchor.constraint(equalToConstant: 100),
-            routeButton.widthAnchor.constraint(equalToConstant: 100)
+            routeButton.heightAnchor.constraint(equalToConstant: 90),
+            routeButton.widthAnchor.constraint(equalToConstant: 90)
         ])
-        mapView.addSubview(resetButton)
+        view.addSubview(resetButton)
         NSLayoutConstraint.activate([
             resetButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 40),
             resetButton.centerXAnchor.constraint(equalTo: mapView.centerXAnchor, constant: 0.0),
@@ -198,6 +311,20 @@ extension ViewController{
         ])
     }
     
+}
+
+extension UIViewController {
+    func add(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    func remove() {
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
 }
 
 
