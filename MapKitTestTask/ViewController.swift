@@ -12,8 +12,15 @@ import AVFoundation
 
 class ViewController: UIViewController {
     var isMove = false
+    var currentCoordinate: CLLocationCoordinate2D!
+    var steps = [MKRoute.Step]()
+    let locationManager = CLLocationManager()
     
-   
+    let directionsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Direction"
+        return label
+    }()
     let addAddressButton: UIButton = {
           let button = UIButton()
           //button.setTitle("Add", for: .normal)
@@ -167,32 +174,82 @@ class ViewController: UIViewController {
     }
     
     private func setupPlaceMark(placeAddress: String){
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(placeAddress) { [self](placemarks, error) in
+//        let geocoder = CLGeocoder()
+//        geocoder.geocodeAddressString(placeAddress) { [self](placemarks, error) in
+//
+//
+//            if let error = error{
+//                print (error)
+//                errorAlert(title: "error", message: "Server is not available")
+//                return
+//            }
+//
+//            guard let placemarks = placemarks  else {return}
+//            let placemark = placemarks.first
+//            guard let placemarkLocation = placemark?.location else {return}
+//
+//            let annotation = MKPointAnnotation()
+//            annotation.title = "\(placeAddress)"
+//
+//            annotation.coordinate = placemarkLocation.coordinate
+//            annotationArray.append(annotation)
+//
+//            if annotationArray.count > 1{
+//                routeButton.isHidden = false
+//                resetButton.isHidden = false
+//            }
+//
+//            mapView.showAnnotations(annotationArray, animated: true)
+//        }
+        let localSearchRequest = MKLocalSearch.Request()
+        localSearchRequest.naturalLanguageQuery = placeAddress
+        let region = MKCoordinateRegion(center: currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        localSearchRequest.region = region
+        let localSearch = MKLocalSearch(request: localSearchRequest)
+        localSearch.start { (response, _) in
+            guard let response = response else { return }
+            guard let firstMapItem = response.mapItems.first else { return }
+            self.getDirections(to: firstMapItem)
+        }
+    }
+    //MARK:Some source code
+    
+    func getDirections(to destination: MKMapItem) {
+        let sourcePlacemark = MKPlacemark(coordinate: currentCoordinate)
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        
+        let directionsRequest = MKDirections.Request()
+        directionsRequest.source = sourceMapItem
+        directionsRequest.destination = destination
+        directionsRequest.transportType = .automobile
+        
+        let directions = MKDirections(request: directionsRequest)
+        directions.calculate { (response, _) in
+            guard let response = response else { return }
+            guard let primaryRoute = response.routes.first else { return }
             
+            self.mapView.addOverlay(primaryRoute.polyline)
             
-            if let error = error{
-                print (error)
-                errorAlert(title: "error", message: "Server is not available")
-                return
+        self.locationManager.monitoredRegions.forEach({ self.locationManager.stopMonitoring(for: $0) })
+            
+            self.steps = primaryRoute.steps
+            for i in 0 ..< primaryRoute.steps.count {
+                let step = primaryRoute.steps[i]
+                print(step.instructions)
+                print(step.distance)
+                let region = CLCircularRegion(center: step.polyline.coordinate,
+                                              radius: 20,
+                                              identifier: "\(i)")
+                self.locationManager.startMonitoring(for: region)
+                let circle = MKCircle(center: region.center, radius: region.radius)
+                self.mapView.addOverlay(circle)
             }
             
-            guard let placemarks = placemarks  else {return}
-            let placemark = placemarks.first
-            guard let placemarkLocation = placemark?.location else {return}
-            
-            let annotation = MKPointAnnotation()
-            annotation.title = "\(placeAddress)"
-            
-            annotation.coordinate = placemarkLocation.coordinate
-            annotationArray.append(annotation)
-            
-            if annotationArray.count > 1{
-                routeButton.isHidden = false
-                resetButton.isHidden = false
-            }
-            
-            mapView.showAnnotations(annotationArray, animated: true)
+            let initialMessage = "In \(self.steps[0].distance) meters, \(self.steps[0].instructions) then in \(self.steps[1].distance) meters, \(self.steps[1].instructions)."
+            self.directionsLabel.text = initialMessage
+            let speechUtterance = AVSpeechUtterance(string: initialMessage)
+            self.speechSynthesizer.speak(speechUtterance)
+            self.stepCounter += 1
         }
     }
     
@@ -275,6 +332,14 @@ extension ViewController{
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0),
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0.0),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
+        ])
+        
+        view.addSubview(directionsLabel)
+        NSLayoutConstraint.activate([
+            directionsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0),
+            directionsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0),
+            directionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0.0),
+            directionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
         ])
         
         view.insertSubview(addAddressButton, at: 0)
