@@ -16,12 +16,15 @@ class ViewController: UIViewController {
     var steps = [MKRoute.Step]()
     let locationManager = CLLocationManager()
     let speechSynthesizer = AVSpeechSynthesizer()
+       
     
     var stepCounter = 0
     
     let directionsLabel: UILabel = {
         let label = UILabel()
         label.text = "Direction"
+        label.textColor = .black
+        
         return label
     }()
     let addAddressButton: UIButton = {
@@ -103,6 +106,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.startUpdatingLocation()
         view.backgroundColor = #colorLiteral(red: 0.9743027091, green: 0.9609521031, blue: 0.9301842451, alpha: 1)
        setConstraints()
         addAddressButton.addTarget(self, action: #selector(addAddressButtonTapped), for: .touchUpInside)
@@ -248,10 +255,12 @@ class ViewController: UIViewController {
                 self.mapView.addOverlay(circle)
             }
             
-            let initialMessage = "In \(self.steps[0].distance) meters, \(self.steps[0].instructions) then in \(self.steps[1].distance) meters, \(self.steps[1].instructions)."
+            let initialMessage = "Через \(self.steps[0].distance) метров, \(self.steps[0].instructions) далее через \(self.steps[1].distance) метров, \(self.steps[1].instructions)."
             self.directionsLabel.text = initialMessage
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
+            self.speechSynthesizer.accessibilityLanguage = "ru-RU"
             self.speechSynthesizer.speak(speechUtterance)
+            
             self.stepCounter += 1
         }
     }
@@ -294,6 +303,34 @@ class ViewController: UIViewController {
   
 
 }
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        manager.stopUpdatingLocation()
+        guard let currentLocation = locations.first else { return }
+        currentCoordinate = currentLocation.coordinate
+        mapView.userTrackingMode = .followWithHeading
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("ENTERED")
+        stepCounter += 1
+        if stepCounter < steps.count {
+            let currentStep = steps[stepCounter]
+            let message = "Через \(currentStep.distance) метров, \(currentStep.instructions)"
+            directionsLabel.text = message
+            let speechUtterance = AVSpeechUtterance(string: message)
+            speechSynthesizer.speak(speechUtterance)
+        } else {
+            let message = "Arrived at destination"
+            directionsLabel.text = message
+            let speechUtterance = AVSpeechUtterance(string: message)
+            speechSynthesizer.speak(speechUtterance)
+            stepCounter = 0
+            locationManager.monitoredRegions.forEach({ self.locationManager.stopMonitoring(for: $0) })
+            
+        }
+    }
+}
 
 extension ViewController: MKMapViewDelegate{
 //    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -331,8 +368,8 @@ extension ViewController{
     func setConstraints(){
         view.addSubview(mapView)
         NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0),
-            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0),
+            mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0.0),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
         ])
@@ -340,7 +377,7 @@ extension ViewController{
         view.addSubview(directionsLabel)
         NSLayoutConstraint.activate([
             directionsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0.0),
-            directionsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0),
+            directionsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10),
             directionsLabel.heightAnchor.constraint(equalToConstant: 30),
             directionsLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
