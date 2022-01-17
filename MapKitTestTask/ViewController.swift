@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     var currentCoordinate: CLLocationCoordinate2D!
     var steps = [MKRoute.Step]()
     let locationManager = CLLocationManager()
+    let speechSynthesizer = AVSpeechSynthesizer()
+    
+    var stepCounter = 0
     
     let directionsLabel: UILabel = {
         let label = UILabel()
@@ -336,10 +339,10 @@ extension ViewController{
         
         view.addSubview(directionsLabel)
         NSLayoutConstraint.activate([
-            directionsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0),
+            directionsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0.0),
             directionsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0),
-            directionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0.0),
-            directionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
+            directionsLabel.heightAnchor.constraint(equalToConstant: 30),
+            directionsLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
         
         view.insertSubview(addAddressButton, at: 0)
