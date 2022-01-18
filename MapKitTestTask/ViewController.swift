@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.autoresizesSubviews = true
-        label.font = UIFont(name: "-BoldItalic", size: 30)
+        label.font = UIFont(name: "SF", size: 20.0)
         //label.lineBreakStrategy = .standard
         label.lineBreakMode = .byTruncatingTail
         
@@ -129,16 +129,15 @@ class ViewController: UIViewController {
       
       let resetButton: UIButton = {
           let button = UIButton()
-          button.setTitle("Reset", for: .normal)
-        button.layer.cornerRadius = 30
-        button.layer.borderWidth = 1
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        button.setTitleColor(UIColor.black, for: .normal)
-       
-        button.isHidden = true
+            button.setImage(#imageLiteral(resourceName: "close.png"), for: .normal)
+            button.imageEdgeInsets.left = 20
+            button.imageEdgeInsets.right = 20
+            button.imageEdgeInsets.bottom = 20
+            button.imageEdgeInsets.top = 20
+        button.layer.cornerRadius = 25
+        button.backgroundColor = .systemRed
+            button.translatesAutoresizingMaskIntoConstraints = false
+
           return button
       }()
     
@@ -490,12 +489,12 @@ extension ViewController{
             routeButton.heightAnchor.constraint(equalToConstant: 90),
             routeButton.widthAnchor.constraint(equalToConstant: 90)
         ])
-        view.addSubview(resetButton)
+        view.insertSubview(resetButton, at: 0)
         NSLayoutConstraint.activate([
-            resetButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 40),
-            resetButton.centerXAnchor.constraint(equalTo: mapView.centerXAnchor, constant: 0.0),
-            resetButton.heightAnchor.constraint(equalToConstant: 60),
-            resetButton.widthAnchor.constraint(equalToConstant: 60)
+            resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -20),
+            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: 0),
+            resetButton.heightAnchor.constraint(equalToConstant: 50),
+            resetButton.widthAnchor.constraint(equalToConstant: 50)
             
         ])
         infoView.addSubview(indicationButton)
