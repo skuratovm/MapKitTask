@@ -142,6 +142,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
+        mapView.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
         view.backgroundColor = #colorLiteral(red: 0.9743027091, green: 0.9609521031, blue: 0.9301842451, alpha: 1)
@@ -151,6 +152,21 @@ class ViewController: UIViewController {
         resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         mapView.delegate = self
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            let pin = mapView.view(for: annotation) as? MKPinAnnotationView ?? MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
+            pin.image = UIImage(named: "gps-arrow-navigator-lite-appstore-for-android-499687")
+            pin.frame = CGRect(x: 0, y: 0, width: 46, height: 50)
+            
+            return pin
+
+        } else {
+            // handle other annotations
+
+        }
+        return nil
     }
     @objc func menuButtonTapped(){
         toggleMenu()
@@ -218,7 +234,7 @@ class ViewController: UIViewController {
     }
     
     private func setupPlaceMark(placeAddress: String){
-//        
+//
         let localSearchRequest = MKLocalSearch.Request()
         localSearchRequest.naturalLanguageQuery = placeAddress
         let region = MKCoordinateRegion(center: currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
