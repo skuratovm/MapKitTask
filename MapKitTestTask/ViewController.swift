@@ -20,23 +20,40 @@ class ViewController: UIViewController {
     
     var stepCounter = 0
     
-    let directionsLabel: UILabel = {
+    let infoView: UIView = {
+       let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.9867531657, green: 0.9864431024, blue: 0.8667159081, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 15
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.black.cgColor
+        return view
+    }()
+    let directionsLabel: UILabel =  {
         let label = UILabel()
         label.text = "Direction"
+        //label.adjustsFontSizeToFitWidth = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
+        label.autoresizesSubviews = true
+        label.font.withSize(25)
+        label.numberOfLines = 3
+        //label.lineBreakStrategy = .standard
+        label.lineBreakMode = .byTruncatingTail
+        
         
         return label
     }()
     let addAddressButton: UIButton = {
           let button = UIButton()
           //button.setTitle("Add", for: .normal)
-        button.setImage(#imageLiteral(resourceName: "point-1984772-1677550.png"), for: .normal)
-        button.imageEdgeInsets.left = 25
-        button.imageEdgeInsets.right = 25
-        button.imageEdgeInsets.bottom = 25
-        button.imageEdgeInsets.top = 25
+        button.setImage(#imageLiteral(resourceName: "Vector-Search.png"), for: .normal)
+        button.imageEdgeInsets.left = 20
+        button.imageEdgeInsets.right = 20
+        button.imageEdgeInsets.bottom = 20
+        button.imageEdgeInsets.top = 20
           button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 27
+        button.layer.cornerRadius = 20
           button.layer.borderWidth = 1
           button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
@@ -95,7 +112,7 @@ class ViewController: UIViewController {
     let mapView: MKMapView = {
            let mapView = MKMapView()
            mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.layer.cornerRadius = 41
+            //mapView.layer.cornerRadius = 41
         mapView.layer.borderWidth = 1
         mapView.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
            return mapView
@@ -122,7 +139,7 @@ class ViewController: UIViewController {
         toggleMenu()
     }
     @objc func addAddressButtonTapped(){
-        AlertAddAddress(title: "Add point", placeholder: "Enter address") { [self](text ) in
+        AlertAddAddress(title: "Куда поедем?", placeholder: "Введите адрес") { [self](text ) in
             setupPlaceMark(placeAddress: text)
         }
     }
@@ -148,7 +165,7 @@ class ViewController: UIViewController {
                            initialSpringVelocity: 0,
                            options: .curveEaseInOut,
                            animations: {
-                            self.mapView.frame.origin.y = self.mapView.frame.origin.y - 130
+                            self.mapView.frame.origin.y = self.mapView.frame.origin.y - 110
                             //self.menuButton.setImage(#imageLiteral(resourceName: "down-chevron-458459.png"), for: .normal)
             }) { (finished) in
                 
@@ -366,6 +383,17 @@ extension ViewController: MKMapViewDelegate{
 extension ViewController{
     
     func setConstraints(){
+        
+        view.insertSubview(infoView, at: 0)
+        NSLayoutConstraint.activate([
+            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            infoView.widthAnchor.constraint(equalToConstant: 200),
+            infoView.heightAnchor.constraint(equalToConstant: 70)
+            
+            
+            
+        ])
         view.addSubview(mapView)
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
@@ -374,20 +402,22 @@ extension ViewController{
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
         ])
         
-        view.addSubview(directionsLabel)
-        NSLayoutConstraint.activate([
-            directionsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0.0),
-            directionsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10),
-            directionsLabel.heightAnchor.constraint(equalToConstant: 30),
-            directionsLabel.widthAnchor.constraint(equalToConstant: 150)
-        ])
+//        view.insertSubview(directionsLabel, at: 0)
+//        NSLayoutConstraint.activate([
+//
+//            directionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 150),
+//            directionsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+//            directionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
+//            directionsLabel.heightAnchor.constraint(equalToConstant: 30),
+//            directionsLabel.widthAnchor.constraint(equalToConstant: 300)
+//        ])
         
         view.insertSubview(addAddressButton, at: 0)
         NSLayoutConstraint.activate([
-            addAddressButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -25),
-            addAddressButton.leadingAnchor.constraint(equalTo: mapView.leadingAnchor,constant: 5),
-            addAddressButton.heightAnchor.constraint(equalToConstant: 90),
-            addAddressButton.widthAnchor.constraint(equalToConstant: 90)
+            addAddressButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -20),
+            addAddressButton.leadingAnchor.constraint(equalTo: mapView.leadingAnchor,constant: 15),
+            addAddressButton.heightAnchor.constraint(equalToConstant: 70),
+            addAddressButton.widthAnchor.constraint(equalToConstant: 70)
             
             
         ])

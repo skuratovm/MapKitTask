@@ -10,9 +10,15 @@ import UIKit
 extension UIViewController{
     func AlertAddAddress(title: String, placeholder: String, completionHandler: @escaping(String) -> Void){
         let alertConroller = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alertConroller.view.backgroundColor = #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
+        alertConroller.view.layer.cornerRadius = 15
+        alertConroller.view.layer.borderWidth = 1
+        alertConroller.view.layer.borderColor = UIColor.black.cgColor
+        
         alertConroller.addTextField { (tf) in
             tf.placeholder  = placeholder
         }
+        
         let addAddressAction = UIAlertAction(title: "Поехали ", style: .default) { (action) in
             let tfText = alertConroller.textFields?.first
             guard let text = tfText?.text else {return}
