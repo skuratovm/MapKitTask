@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9867531657, green: 0.9864431024, blue: 0.8667159081, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 18
+        view.alpha = 0.8
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black.cgColor
         view.isHidden = true
@@ -402,17 +403,28 @@ extension ViewController{
     
     func setConstraints(){
         
-        view.insertSubview(infoView, at: 0)
+//        view.insertSubview(infoView, at: 0)
+//        NSLayoutConstraint.activate([
+//            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+//            infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+//            infoView.widthAnchor.constraint(equalToConstant: 200),
+//            infoView.heightAnchor.constraint(equalToConstant: 70)
+//            
+//            
+//            
+//        ])
+        
+        view.insertSubview(infoView, at: 1)
         NSLayoutConstraint.activate([
-            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            infoView.widthAnchor.constraint(equalToConstant: 200),
+            infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            infoView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            infoView.widthAnchor.constraint(equalToConstant: 160),
             infoView.heightAnchor.constraint(equalToConstant: 70)
             
             
             
         ])
-        view.addSubview(mapView)
+        view.insertSubview(mapView, at: 0)
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
