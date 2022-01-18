@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
           return button
       }()
-    let currentLocation: UIButton = {
+    let currentLocationButton: UIButton = {
         let button = UIButton()
           //button.setTitle("Add", for: .normal)
         button.setImage(#imageLiteral(resourceName: "location.png"), for: .normal)
@@ -168,6 +168,7 @@ class ViewController: UIViewController {
         routeButton.addTarget(self, action: #selector(routeButtonTapped), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        currentLocationButton.addTarget(self, action: #selector(trackUserTapped), for: .touchUpInside)
         mapView.delegate = self
     }
     
@@ -184,6 +185,9 @@ class ViewController: UIViewController {
 
         }
         return nil
+    }
+    @objc func trackUserTapped(){
+        mapView.setUserTrackingMode(.followWithHeading, animated: true)
     }
     @objc func menuButtonTapped(){
         toggleMenu()
@@ -462,12 +466,12 @@ extension ViewController{
             
         ])
         //MARK:Location
-        view.insertSubview(currentLocation, at: 0)
+        view.insertSubview(currentLocationButton, at: 0)
         NSLayoutConstraint.activate([
-            currentLocation.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -20),
-            currentLocation.trailingAnchor.constraint(equalTo: mapView.trailingAnchor,constant: -15),
-            currentLocation.heightAnchor.constraint(equalToConstant: 70),
-            currentLocation.widthAnchor.constraint(equalToConstant: 70)
+            currentLocationButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -20),
+            currentLocationButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor,constant: -15),
+            currentLocationButton.heightAnchor.constraint(equalToConstant: 70),
+            currentLocationButton.widthAnchor.constraint(equalToConstant: 70)
             
         ])
         
