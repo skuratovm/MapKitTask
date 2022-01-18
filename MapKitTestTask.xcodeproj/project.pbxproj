@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40399FA927970E7C00AD572B /* turn-right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FA827970E7C00AD572B /* turn-right-arrow.png */; };
 		40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD127961BC10039DD51 /* down-chevron-458459.png */; };
 		40834BD627961BC10039DD51 /* route-2459472-2139747.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD227961BC10039DD51 /* route-2459472-2139747.png */; };
 		40834BD727961BC10039DD51 /* point-1984772-1677550.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD327961BC10039DD51 /* point-1984772-1677550.png */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40399FA827970E7C00AD572B /* turn-right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "turn-right-arrow.png"; path = "../../../Downloads/turn-right-arrow.png"; sourceTree = "<group>"; };
 		40834BD127961BC10039DD51 /* down-chevron-458459.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-chevron-458459.png"; path = "../../../../Downloads/down-chevron-458459.png"; sourceTree = "<group>"; };
 		40834BD227961BC10039DD51 /* route-2459472-2139747.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "route-2459472-2139747.png"; path = "../../../../Downloads/route-2459472-2139747.png"; sourceTree = "<group>"; };
 		40834BD327961BC10039DD51 /* point-1984772-1677550.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "point-1984772-1677550.png"; path = "../../../../Downloads/point-1984772-1677550.png"; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		40FE2BFE2711957400DAEB99 /* MapKitTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				40399FA827970E7C00AD572B /* turn-right-arrow.png */,
 				40D5F5DA2797004B0065DFF9 /* Vector-Search.png */,
 				40834BD027961BA20039DD51 /* Image Set */,
 				40FE2BFF2711957400DAEB99 /* AppDelegate.swift */,
@@ -150,6 +153,7 @@
 				40834BD727961BC10039DD51 /* point-1984772-1677550.png in Resources */,
 				40D5F5DB2797004B0065DFF9 /* Vector-Search.png in Resources */,
 				40FE2C0C2711957500DAEB99 /* LaunchScreen.storyboard in Resources */,
+				40399FA927970E7C00AD572B /* turn-right-arrow.png in Resources */,
 				40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */,
 				40834BD827961BC10039DD51 /* up-chevron-458462.png in Resources */,
 				40FE2C092711957500DAEB99 /* Assets.xcassets in Resources */,

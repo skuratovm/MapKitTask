@@ -29,9 +29,24 @@ class ViewController: UIViewController {
         view.layer.borderColor = UIColor.black.cgColor
         return view
     }()
+    
+    let indicationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "turn-right-arrow.png"), for: .normal)
+        button.imageEdgeInsets.bottom = 5
+        button.imageEdgeInsets.top = 5
+        button.imageEdgeInsets.left = 5
+        button.imageEdgeInsets.right = 5
+        button.layer.cornerRadius = 15
+          button.layer.borderWidth = 1
+          button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        return button
+    }()
     let directionsLabel: UILabel =  {
         let label = UILabel()
-        label.text = "Direction"
+        label.text = "200 m"
         //label.adjustsFontSizeToFitWidth = false
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
@@ -402,15 +417,15 @@ extension ViewController{
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
         ])
         
-//        view.insertSubview(directionsLabel, at: 0)
-//        NSLayoutConstraint.activate([
-//
-//            directionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 150),
-//            directionsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-//            directionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
-//            directionsLabel.heightAnchor.constraint(equalToConstant: 30),
-//            directionsLabel.widthAnchor.constraint(equalToConstant: 300)
-//        ])
+        infoView.insertSubview(directionsLabel, at: 0)
+        NSLayoutConstraint.activate([
+
+            directionsLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 15),
+            directionsLabel.centerYAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 0),
+            //directionsLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -10),
+            directionsLabel.heightAnchor.constraint(equalToConstant: 30),
+            directionsLabel.widthAnchor.constraint(equalToConstant: 75)
+        ])
         
         view.insertSubview(addAddressButton, at: 0)
         NSLayoutConstraint.activate([
@@ -421,6 +436,7 @@ extension ViewController{
             
             
         ])
+        
         mapView.addSubview(menuButton)
         NSLayoutConstraint.activate([
             menuButton.heightAnchor.constraint(equalToConstant: 43),
@@ -443,6 +459,10 @@ extension ViewController{
             resetButton.heightAnchor.constraint(equalToConstant: 60),
             resetButton.widthAnchor.constraint(equalToConstant: 60)
             
+        ])
+        infoView.addSubview(indicationButton)
+        NSLayoutConstraint.activate([
+            indicationButton.
         ])
     }
     
