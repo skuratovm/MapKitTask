@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         view.layer.cornerRadius = 18
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black.cgColor
+        view.isHidden = true
         return view
     }()
     
@@ -34,6 +35,7 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "turn-right-arrow.png"), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.9833298326, blue: 0.7084185481, alpha: 1)
         button.imageEdgeInsets.bottom = 8
         button.imageEdgeInsets.top = 8
         button.imageEdgeInsets.left = 8
@@ -41,6 +43,7 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
         button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
         
         return button
     }()
@@ -51,8 +54,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.autoresizesSubviews = true
-        label.font.withSize(25)
-        label.numberOfLines = 3
+        label.font = UIFont(name: "-BoldItalic", size: 30)
         //label.lineBreakStrategy = .standard
         label.lineBreakMode = .byTruncatingTail
         
@@ -252,6 +254,7 @@ class ViewController: UIViewController {
             guard let response = response else { return }
             guard let firstMapItem = response.mapItems.first else { return }
             self.getDirections(to: firstMapItem)
+            self.infoView.isHidden = false
         }
     }
     //MARK:Some source code
@@ -288,7 +291,7 @@ class ViewController: UIViewController {
             }
             
             let initialMessage = "Через \(self.steps[0].distance) метров, \(self.steps[0].instructions) далее через \(self.steps[1].distance) метров, \(self.steps[1].instructions)."
-            self.directionsLabel.text = initialMessage
+            self.directionsLabel.text = "\(self.steps[0].distance) m"
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
             self.speechSynthesizer.accessibilityLanguage = "ru-RU"
             self.speechSynthesizer.speak(speechUtterance)
