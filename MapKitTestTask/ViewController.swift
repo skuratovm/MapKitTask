@@ -39,8 +39,8 @@ class ViewController: UIViewController {
         button.imageEdgeInsets.left = 5
         button.imageEdgeInsets.right = 5
         button.layer.cornerRadius = 15
-          button.layer.borderWidth = 1
-          button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.layer.borderWidth = 1
+        button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         return button
     }()
@@ -462,7 +462,12 @@ extension ViewController{
         ])
         infoView.addSubview(indicationButton)
         NSLayoutConstraint.activate([
-            indicationButton.
+            indicationButton.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -10),
+            indicationButton.centerYAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 0),
+            indicationButton.heightAnchor.constraint(equalToConstant: 60),
+            indicationButton.widthAnchor.constraint(equalToConstant: 60)
+            
+            
         ])
     }
     
