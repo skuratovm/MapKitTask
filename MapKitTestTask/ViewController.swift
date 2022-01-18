@@ -25,7 +25,6 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9867531657, green: 0.9864431024, blue: 0.8667159081, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 18
-        view.alpha = 0.9
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black.cgColor
         view.isHidden = true
@@ -219,33 +218,7 @@ class ViewController: UIViewController {
     }
     
     private func setupPlaceMark(placeAddress: String){
-//        let geocoder = CLGeocoder()
-//        geocoder.geocodeAddressString(placeAddress) { [self](placemarks, error) in
-//
-//
-//            if let error = error{
-//                print (error)
-//                errorAlert(title: "error", message: "Server is not available")
-//                return
-//            }
-//
-//            guard let placemarks = placemarks  else {return}
-//            let placemark = placemarks.first
-//            guard let placemarkLocation = placemark?.location else {return}
-//
-//            let annotation = MKPointAnnotation()
-//            annotation.title = "\(placeAddress)"
-//
-//            annotation.coordinate = placemarkLocation.coordinate
-//            annotationArray.append(annotation)
-//
-//            if annotationArray.count > 1{
-//                routeButton.isHidden = false
-//                resetButton.isHidden = false
-//            }
-//
-//            mapView.showAnnotations(annotationArray, animated: true)
-//        }
+//        
         let localSearchRequest = MKLocalSearch.Request()
         localSearchRequest.naturalLanguageQuery = placeAddress
         let region = MKCoordinateRegion(center: currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -294,7 +267,7 @@ class ViewController: UIViewController {
             let intZeroStepDistance = Int(self.steps[0].distance)
             let intFirstStepDistance = Int(self.steps[1].distance)
             
-            let initialMessage = "Через \(intZeroStepDistance) метров, \(self.steps[0].instructions) далее через \(intFirstStepDistance) метров, \(self.steps[1].instructions)."
+            let initialMessage = "Через \(intZeroStepDistance) метров, \(self.steps[0].instructions) затем через \(intFirstStepDistance) метров, \(self.steps[1].instructions)."
             self.directionsLabel.text = "\(intFirstStepDistance) m"
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
             self.speechSynthesizer.accessibilityLanguage = "ru-RU"
@@ -355,8 +328,9 @@ extension ViewController: CLLocationManagerDelegate {
         stepCounter += 1
         if stepCounter < steps.count {
             let currentStep = steps[stepCounter]
-            let message = "Через \(currentStep.distance) метров, \(currentStep.instructions)"
-            directionsLabel.text = message
+            let intStepDistance = Int(currentStep.distance)
+            let message = "Через \(intStepDistance) метров, \(currentStep.instructions)"
+            directionsLabel.text = "\(intStepDistance) m"
             let speechUtterance = AVSpeechUtterance(string: message)
             speechSynthesizer.speak(speechUtterance)
         } else {
