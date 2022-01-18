@@ -24,7 +24,7 @@ class ViewController: UIViewController {
        let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9867531657, green: 0.9864431024, blue: 0.8667159081, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 18
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black.cgColor
         return view
@@ -34,10 +34,10 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "turn-right-arrow.png"), for: .normal)
-        button.imageEdgeInsets.bottom = 5
-        button.imageEdgeInsets.top = 5
-        button.imageEdgeInsets.left = 5
-        button.imageEdgeInsets.right = 5
+        button.imageEdgeInsets.bottom = 8
+        button.imageEdgeInsets.top = 8
+        button.imageEdgeInsets.left = 8
+        button.imageEdgeInsets.right = 8
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
         button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -462,7 +462,7 @@ extension ViewController{
         ])
         infoView.addSubview(indicationButton)
         NSLayoutConstraint.activate([
-            indicationButton.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -10),
+            indicationButton.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -5),
             indicationButton.centerYAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 0),
             indicationButton.heightAnchor.constraint(equalToConstant: 60),
             indicationButton.widthAnchor.constraint(equalToConstant: 60)
