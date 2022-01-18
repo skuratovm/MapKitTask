@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     let indicationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "turn-right-arrow.png"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
         button.backgroundColor = #colorLiteral(red: 1, green: 0.9833298326, blue: 0.7084185481, alpha: 1)
         button.imageEdgeInsets.bottom = 8
         button.imageEdgeInsets.top = 8
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         button.imageEdgeInsets.bottom = 20
         button.imageEdgeInsets.top = 20
           button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 35
           button.layer.borderWidth = 1
           button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
@@ -81,16 +81,19 @@ class ViewController: UIViewController {
          let button = UIButton()
        // button.setTitle(" ^ ", for: .normal)
         
-        button.setImage(#imageLiteral(resourceName: "up-chevron-458462.png"), for: .normal)
-        button.imageEdgeInsets.left = 35
-        button.imageEdgeInsets.right = 35
-        button.imageEdgeInsets.bottom = 9
-        button.imageEdgeInsets.top = 9
+        //button.setImage(#imageLiteral(resourceName: "up-chevron-458462.png"), for: .normal)
+        button.imageEdgeInsets.left = 55
+        button.imageEdgeInsets.right = 55
+//        button.imageEdgeInsets.bottom = 9
+//        button.imageEdgeInsets.top = 9
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 20
-        button.layer.borderWidth = 1
-        button.layer.borderColor =  #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        button.backgroundColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        button.layer.cornerRadius = 20
+//        button.layer.borderWidth = 1
+//        button.layer.borderColor =  #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+//        button.backgroundColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.setImage(#imageLiteral(resourceName: "5684692.png"), for: .normal)
+       
+        
         return button
     }()
       
@@ -448,8 +451,8 @@ extension ViewController{
         
         mapView.addSubview(menuButton)
         NSLayoutConstraint.activate([
-            menuButton.heightAnchor.constraint(equalToConstant: 43),
-            menuButton.widthAnchor.constraint(equalToConstant: 150),
+            menuButton.heightAnchor.constraint(equalToConstant: 54),
+            menuButton.widthAnchor.constraint(equalToConstant: 167),
             menuButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -15),
             menuButton.centerXAnchor.constraint(equalTo: mapView.centerXAnchor, constant: 0.0)
         ])
