@@ -207,7 +207,7 @@ class ViewController: UIViewController {
         mapView.removeAnnotations(mapView.annotations)
         annotationArray = [MKPointAnnotation]()
         resetButton.isHidden = true
-        routeButton.isHidden = true
+        infoView.isHidden = true
     }
     func showMenuViewController(shouldMove: Bool) {
         if shouldMove {
@@ -303,7 +303,7 @@ class ViewController: UIViewController {
             let intZeroStepDistance = Int(self.steps[0].distance)
             let intFirstStepDistance = Int(self.steps[1].distance)
             
-            let initialMessage = "Через \(intZeroStepDistance) метров, \(self.steps[0].instructions) затем через \(intFirstStepDistance) метров, \(self.steps[1].instructions)."
+            let initialMessage = "через \(intFirstStepDistance) метров, \(self.steps[1].instructions)."
             self.directionsLabel.text = "\(intFirstStepDistance) m"
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
             self.speechSynthesizer.accessibilityLanguage = "ru-RU"
