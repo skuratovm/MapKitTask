@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9867531657, green: 0.9864431024, blue: 0.8667159081, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 18
-        view.alpha = 0.8
+        view.alpha = 0.9
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black.cgColor
         view.isHidden = true
@@ -290,9 +290,12 @@ class ViewController: UIViewController {
                 let circle = MKCircle(center: region.center, radius: region.radius)
                 self.mapView.addOverlay(circle)
             }
+
+            let intZeroStepDistance = Int(self.steps[0].distance)
+            let intFirstStepDistance = Int(self.steps[1].distance)
             
-            let initialMessage = "Через \(self.steps[0].distance) метров, \(self.steps[0].instructions) далее через \(self.steps[1].distance) метров, \(self.steps[1].instructions)."
-            self.directionsLabel.text = "\(self.steps[0].distance) m"
+            let initialMessage = "Через \(intZeroStepDistance) метров, \(self.steps[0].instructions) далее через \(intFirstStepDistance) метров, \(self.steps[1].instructions)."
+            self.directionsLabel.text = "\(intFirstStepDistance) m"
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
             self.speechSynthesizer.accessibilityLanguage = "ru-RU"
             self.speechSynthesizer.speak(speechUtterance)
