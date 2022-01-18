@@ -35,16 +35,14 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
-        button.backgroundColor = #colorLiteral(red: 1, green: 0.9833298326, blue: 0.7084185481, alpha: 1)
+        //button.backgroundColor = #colorLiteral(red: 1, green: 0.9833298326, blue: 0.7084185481, alpha: 1)
         button.imageEdgeInsets.bottom = 8
         button.imageEdgeInsets.top = 8
         button.imageEdgeInsets.left = 8
         button.imageEdgeInsets.right = 8
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        
-        
+//        button.layer.cornerRadius = 15
+//        button.layer.borderWidth = 1
+//        button.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         return button
     }()
     let directionsLabel: UILabel =  {
@@ -69,10 +67,25 @@ class ViewController: UIViewController {
         button.imageEdgeInsets.right = 20
         button.imageEdgeInsets.bottom = 20
         button.imageEdgeInsets.top = 20
-          button.translatesAutoresizingMaskIntoConstraints = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 35
-          button.layer.borderWidth = 1
-          button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.layer.borderWidth = 1
+        button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
+          return button
+      }()
+    let currentLocation: UIButton = {
+        let button = UIButton()
+          //button.setTitle("Add", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "location.png"), for: .normal)
+        button.imageEdgeInsets.left = 18
+        button.imageEdgeInsets.right = 20
+        button.imageEdgeInsets.bottom = 18
+        button.imageEdgeInsets.top = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 35
+        button.layer.borderWidth = 1
+        button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
           return button
       }()
@@ -432,7 +445,7 @@ extension ViewController{
         infoView.insertSubview(directionsLabel, at: 0)
         NSLayoutConstraint.activate([
 
-            directionsLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 15),
+            directionsLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 25),
             directionsLabel.centerYAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 0),
             //directionsLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -10),
             directionsLabel.heightAnchor.constraint(equalToConstant: 30),
@@ -446,6 +459,15 @@ extension ViewController{
             addAddressButton.heightAnchor.constraint(equalToConstant: 70),
             addAddressButton.widthAnchor.constraint(equalToConstant: 70)
             
+            
+        ])
+        //MARK:Location
+        view.insertSubview(currentLocation, at: 0)
+        NSLayoutConstraint.activate([
+            currentLocation.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -20),
+            currentLocation.trailingAnchor.constraint(equalTo: mapView.trailingAnchor,constant: -15),
+            currentLocation.heightAnchor.constraint(equalToConstant: 70),
+            currentLocation.widthAnchor.constraint(equalToConstant: 70)
             
         ])
         
