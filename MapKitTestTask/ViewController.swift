@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         button.imageEdgeInsets.right = 8
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
-        button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         
         
         return button
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
-        button.layer.borderColor =  #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        button.layer.borderColor =  #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         button.backgroundColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return button
     }()
@@ -145,7 +145,8 @@ class ViewController: UIViewController {
         mapView.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
-        view.backgroundColor = #colorLiteral(red: 0.9743027091, green: 0.9609521031, blue: 0.9301842451, alpha: 1)
+        //view.backgroundColor = #colorLiteral(red: 0.9743027091, green: 0.9609521031, blue: 0.9301842451, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1671384573, green: 0.1766074598, blue: 0.1851920187, alpha: 1)
        setConstraints()
         addAddressButton.addTarget(self, action: #selector(addAddressButtonTapped), for: .touchUpInside)
         routeButton.addTarget(self, action: #selector(routeButtonTapped), for: .touchUpInside)
@@ -158,7 +159,7 @@ class ViewController: UIViewController {
         if annotation is MKUserLocation {
             let pin = mapView.view(for: annotation) as? MKPinAnnotationView ?? MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
             pin.image = UIImage(named: "gps-arrow-navigator-lite-appstore-for-android-499687")
-            pin.frame = CGRect(x: 0, y: 0, width: 46, height: 50)
+            pin.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
             
             return pin
 
@@ -383,8 +384,8 @@ extension ViewController: MKMapViewDelegate{
         }
         if overlay is MKCircle {
             let renderer = MKCircleRenderer(overlay: overlay)
-            renderer.strokeColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-            renderer.fillColor = .red
+            renderer.strokeColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+            renderer.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             renderer.alpha = 0.5
             return renderer
         }

@@ -10,6 +10,7 @@
 		40399FA927970E7C00AD572B /* turn-right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FA827970E7C00AD572B /* turn-right-arrow.png */; };
 		40399FAC2797127500AD572B /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40399FAB2797127500AD572B /* SFProDisplay-Medium.ttf */; };
 		40399FAF27972B3400AD572B /* gps-arrow-navigator-lite-appstore-for-android-499687.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FAE27972B3400AD572B /* gps-arrow-navigator-lite-appstore-for-android-499687.png */; };
+		40399FB22797399000AD572B /* —Pngtree—vector turn left icon_4184711.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FB12797399000AD572B /* —Pngtree—vector turn left icon_4184711.png */; };
 		40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD127961BC10039DD51 /* down-chevron-458459.png */; };
 		40834BD627961BC10039DD51 /* route-2459472-2139747.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD227961BC10039DD51 /* route-2459472-2139747.png */; };
 		40834BD727961BC10039DD51 /* point-1984772-1677550.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD327961BC10039DD51 /* point-1984772-1677550.png */; };
@@ -27,6 +28,7 @@
 		40399FA827970E7C00AD572B /* turn-right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "turn-right-arrow.png"; path = "../../../Downloads/turn-right-arrow.png"; sourceTree = "<group>"; };
 		40399FAB2797127500AD572B /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFProDisplay-Medium.ttf"; path = "../../../Downloads/SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		40399FAE27972B3400AD572B /* gps-arrow-navigator-lite-appstore-for-android-499687.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gps-arrow-navigator-lite-appstore-for-android-499687.png"; path = "../../../Downloads/gps-arrow-navigator-lite-appstore-for-android-499687.png"; sourceTree = "<group>"; };
+		40399FB12797399000AD572B /* —Pngtree—vector turn left icon_4184711.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "—Pngtree—vector turn left icon_4184711.png"; path = "../../../Downloads/—Pngtree—vector turn left icon_4184711.png"; sourceTree = "<group>"; };
 		40834BD127961BC10039DD51 /* down-chevron-458459.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-chevron-458459.png"; path = "../../../../Downloads/down-chevron-458459.png"; sourceTree = "<group>"; };
 		40834BD227961BC10039DD51 /* route-2459472-2139747.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "route-2459472-2139747.png"; path = "../../../../Downloads/route-2459472-2139747.png"; sourceTree = "<group>"; };
 		40834BD327961BC10039DD51 /* point-1984772-1677550.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "point-1984772-1677550.png"; path = "../../../../Downloads/point-1984772-1677550.png"; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		40FE2BFE2711957400DAEB99 /* MapKitTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				40399FB12797399000AD572B /* —Pngtree—vector turn left icon_4184711.png */,
 				40399FAE27972B3400AD572B /* gps-arrow-navigator-lite-appstore-for-android-499687.png */,
 				40399FAB2797127500AD572B /* SFProDisplay-Medium.ttf */,
 				40399FA827970E7C00AD572B /* turn-right-arrow.png */,
@@ -159,6 +162,7 @@
 				40834BD727961BC10039DD51 /* point-1984772-1677550.png in Resources */,
 				40D5F5DB2797004B0065DFF9 /* Vector-Search.png in Resources */,
 				40FE2C0C2711957500DAEB99 /* LaunchScreen.storyboard in Resources */,
+				40399FB22797399000AD572B /* —Pngtree—vector turn left icon_4184711.png in Resources */,
 				40399FA927970E7C00AD572B /* turn-right-arrow.png in Resources */,
 				40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */,
 				40834BD827961BC10039DD51 /* up-chevron-458462.png in Resources */,
