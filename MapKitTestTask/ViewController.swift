@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     let indicationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
+        //button.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
         //button.backgroundColor = #colorLiteral(red: 1, green: 0.9833298326, blue: 0.7084185481, alpha: 1)
         button.imageEdgeInsets.bottom = 8
         button.imageEdgeInsets.top = 8
@@ -130,10 +130,10 @@ class ViewController: UIViewController {
       let resetButton: UIButton = {
           let button = UIButton()
             button.setImage(#imageLiteral(resourceName: "close.png"), for: .normal)
-            button.imageEdgeInsets.left = 20
-            button.imageEdgeInsets.right = 20
-            button.imageEdgeInsets.bottom = 20
-            button.imageEdgeInsets.top = 20
+            button.imageEdgeInsets.left = 12
+            button.imageEdgeInsets.right = 12
+            button.imageEdgeInsets.bottom = 12
+            button.imageEdgeInsets.top = 12
         button.layer.cornerRadius = 25
         button.backgroundColor = .systemRed
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -300,11 +300,23 @@ class ViewController: UIViewController {
                 self.mapView.addOverlay(circle)
             }
 
-            let intZeroStepDistance = Int(self.steps[0].distance)
+            //let intZeroStepDistance = Int(self.steps[0].distance)
             let intFirstStepDistance = Int(self.steps[1].distance)
             
             let initialMessage = "через \(intFirstStepDistance) метров, \(self.steps[1].instructions)."
             self.directionsLabel.text = "\(intFirstStepDistance) m"
+            print(self.steps[1].instructions)
+                //MARK: String split
+            var sent = self.steps[1].instructions
+            var words = sent.split(separator: " ")
+            var directionWord = words[1]
+            if directionWord == "направо"{
+                self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn right icon_4184680.png"), for: .normal)
+            } else if directionWord == "налево"{
+                self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
+            }
+            print(words[1])
+            
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
             self.speechSynthesizer.accessibilityLanguage = "ru-RU"
             self.speechSynthesizer.speak(speechUtterance)
@@ -491,7 +503,7 @@ extension ViewController{
         ])
         view.insertSubview(resetButton, at: 0)
         NSLayoutConstraint.activate([
-            resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -20),
+            resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30),
             resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: 0),
             resetButton.heightAnchor.constraint(equalToConstant: 50),
             resetButton.widthAnchor.constraint(equalToConstant: 50)

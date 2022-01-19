@@ -15,6 +15,7 @@
 		40399FB827973CD200AD572B /* 5684692.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FB727973CD200AD572B /* 5684692.png */; };
 		40399FBB2797749F00AD572B /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FBA2797749F00AD572B /* location.png */; };
 		40399FBE2797805B00AD572B /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FBD2797805B00AD572B /* close.png */; };
+		40399FC12798015400AD572B /* —Pngtree—vector turn right icon_4184680.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FC02798015400AD572B /* —Pngtree—vector turn right icon_4184680.png */; };
 		40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD127961BC10039DD51 /* down-chevron-458459.png */; };
 		40834BD627961BC10039DD51 /* route-2459472-2139747.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD227961BC10039DD51 /* route-2459472-2139747.png */; };
 		40834BD727961BC10039DD51 /* point-1984772-1677550.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD327961BC10039DD51 /* point-1984772-1677550.png */; };
@@ -37,6 +38,7 @@
 		40399FB727973CD200AD572B /* 5684692.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 5684692.png; path = ../../../Downloads/5684692.png; sourceTree = "<group>"; };
 		40399FBA2797749F00AD572B /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = ../../../Downloads/location.png; sourceTree = "<group>"; };
 		40399FBD2797805B00AD572B /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = ../../../Downloads/close.png; sourceTree = "<group>"; };
+		40399FC02798015400AD572B /* —Pngtree—vector turn right icon_4184680.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "—Pngtree—vector turn right icon_4184680.png"; path = "../../../Downloads/—Pngtree—vector turn right icon_4184680.png"; sourceTree = "<group>"; };
 		40834BD127961BC10039DD51 /* down-chevron-458459.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-chevron-458459.png"; path = "../../../../Downloads/down-chevron-458459.png"; sourceTree = "<group>"; };
 		40834BD227961BC10039DD51 /* route-2459472-2139747.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "route-2459472-2139747.png"; path = "../../../../Downloads/route-2459472-2139747.png"; sourceTree = "<group>"; };
 		40834BD327961BC10039DD51 /* point-1984772-1677550.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "point-1984772-1677550.png"; path = "../../../../Downloads/point-1984772-1677550.png"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		40FE2BFE2711957400DAEB99 /* MapKitTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				40399FC02798015400AD572B /* —Pngtree—vector turn right icon_4184680.png */,
 				40399FBD2797805B00AD572B /* close.png */,
 				40399FBA2797749F00AD572B /* location.png */,
 				40399FB727973CD200AD572B /* 5684692.png */,
@@ -183,6 +186,7 @@
 				40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */,
 				40834BD827961BC10039DD51 /* up-chevron-458462.png in Resources */,
 				40FE2C092711957500DAEB99 /* Assets.xcassets in Resources */,
+				40399FC12798015400AD572B /* —Pngtree—vector turn right icon_4184680.png in Resources */,
 				40399FAF27972B3400AD572B /* gps-arrow-navigator-lite-appstore-for-android-499687.png in Resources */,
 				40834BD627961BC10039DD51 /* route-2459472-2139747.png in Resources */,
 				40399FAC2797127500AD572B /* SFProDisplay-Medium.ttf in Resources */,
