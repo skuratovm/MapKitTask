@@ -16,12 +16,11 @@ class ViewController: UIViewController {
     var steps = [MKRoute.Step]()
     let locationManager = CLLocationManager()
     let speechSynthesizer = AVSpeechSynthesizer()
-       
     
     var stepCounter = 0
     
     let infoView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9867531657, green: 0.9864431024, blue: 0.8667159081, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 18
@@ -34,34 +33,21 @@ class ViewController: UIViewController {
     let indicationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        //button.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
-        //button.backgroundColor = #colorLiteral(red: 1, green: 0.9833298326, blue: 0.7084185481, alpha: 1)
         button.imageEdgeInsets.bottom = 8
         button.imageEdgeInsets.top = 8
         button.imageEdgeInsets.left = 8
         button.imageEdgeInsets.right = 8
-//        button.layer.cornerRadius = 15
-//        button.layer.borderWidth = 1
-//        button.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         return button
     }()
     let directionsLabel: UILabel =  {
         let label = UILabel()
-        label.text = "200 m"
-        //label.adjustsFontSizeToFitWidth = false
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.autoresizesSubviews = true
-        label.font = UIFont(name: "SF", size: 20.0)
-        //label.lineBreakStrategy = .standard
         label.lineBreakMode = .byTruncatingTail
-        
-        
         return label
     }()
     let addAddressButton: UIButton = {
-          let button = UIButton()
-          //button.setTitle("Add", for: .normal)
+        let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "Vector-Search.png"), for: .normal)
         button.imageEdgeInsets.left = 20
         button.imageEdgeInsets.right = 20
@@ -72,11 +58,10 @@ class ViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
-          return button
-      }()
+        return button
+    }()
     let currentLocationButton: UIButton = {
         let button = UIButton()
-          //button.setTitle("Add", for: .normal)
         button.setImage(#imageLiteral(resourceName: "location.png"), for: .normal)
         button.imageEdgeInsets.left = 18
         button.imageEdgeInsets.right = 20
@@ -87,69 +72,59 @@ class ViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor =  #colorLiteral(red: 0.6804623008, green: 0.8824461102, blue: 0.9622985721, alpha: 1)
-          return button
-      }()
+        return button
+    }()
     
     let menuButton: UIButton = {
-         let button = UIButton()
-       // button.setTitle(" ^ ", for: .normal)
-        
-        //button.setImage(#imageLiteral(resourceName: "up-chevron-458462.png"), for: .normal)
+        let button = UIButton()
         button.imageEdgeInsets.left = 55
         button.imageEdgeInsets.right = 55
-//        button.imageEdgeInsets.bottom = 9
-//        button.imageEdgeInsets.top = 9
+        
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 20
-//        button.layer.borderWidth = 1
-//        button.layer.borderColor =  #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-//        button.backgroundColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         button.setImage(#imageLiteral(resourceName: "5684692.png"), for: .normal)
-       
+        
         
         return button
     }()
-      
-      let routeButton: UIButton = {
-          let button = UIButton()
-          //button.setTitle("Route", for: .normal)
+    
+    let routeButton: UIButton = {
+        let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "route-2459472-2139747.png"), for: .normal)
         button.imageEdgeInsets.left = 23
         button.imageEdgeInsets.right = 23
         button.imageEdgeInsets.bottom = 23
         button.imageEdgeInsets.top = 23
-          button.translatesAutoresizingMaskIntoConstraints = false
-          button.layer.cornerRadius = 27
-          button.layer.borderWidth = 1
-          button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 27
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         button.isHidden = true
-          return button
-      }()
-      
-      let resetButton: UIButton = {
-          let button = UIButton()
-            button.setImage(#imageLiteral(resourceName: "close.png"), for: .normal)
-            button.imageEdgeInsets.left = 12
-            button.imageEdgeInsets.right = 12
-            button.imageEdgeInsets.bottom = 12
-            button.imageEdgeInsets.top = 12
+        return button
+    }()
+    
+    let resetButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "close.png"), for: .normal)
+        button.imageEdgeInsets.left = 12
+        button.imageEdgeInsets.right = 12
+        button.imageEdgeInsets.bottom = 12
+        button.imageEdgeInsets.top = 12
         button.layer.cornerRadius = 25
         button.backgroundColor = .systemRed
-            button.translatesAutoresizingMaskIntoConstraints = false
-
-          return button
-      }()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        return button
+    }()
     
     let mapView: MKMapView = {
-           let mapView = MKMapView()
-           mapView.translatesAutoresizingMaskIntoConstraints = false
-            //mapView.layer.cornerRadius = 41
+        let mapView = MKMapView()
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        //mapView.layer.cornerRadius = 41
         mapView.layer.borderWidth = 1
         mapView.layer.borderColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-           return mapView
-           
-       }()
+        return mapView
+    }()
     
     var annotationArray = [MKPointAnnotation]()
     
@@ -160,11 +135,10 @@ class ViewController: UIViewController {
         mapView.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
-        //view.backgroundColor = #colorLiteral(red: 0.9743027091, green: 0.9609521031, blue: 0.9301842451, alpha: 1)
         view.backgroundColor = #colorLiteral(red: 0.1671384573, green: 0.1766074598, blue: 0.1851920187, alpha: 1)
-       setConstraints()
+        setConstraints()
         addAddressButton.addTarget(self, action: #selector(addAddressButtonTapped), for: .touchUpInside)
-        routeButton.addTarget(self, action: #selector(routeButtonTapped), for: .touchUpInside)
+        //routeButton.addTarget(self, action: #selector(routeButtonTapped), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         currentLocationButton.addTarget(self, action: #selector(trackUserTapped), for: .touchUpInside)
@@ -178,10 +152,10 @@ class ViewController: UIViewController {
             pin.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
             
             return pin
-
+            
         } else {
             // handle other annotations
-
+            
         }
         return nil
     }
@@ -196,12 +170,12 @@ class ViewController: UIViewController {
             setupPlaceMark(placeAddress: text)
         }
     }
-    @objc func routeButtonTapped(){
-        for index in 0...annotationArray.count - 2{
-            createTheRoute(startCoord: annotationArray[index].coordinate, destinationCoord: annotationArray[index + 1].coordinate)
-        }
-        mapView.showAnnotations(annotationArray, animated: true)
-    }
+//    @objc func routeButtonTapped(){
+//        for index in 0...annotationArray.count - 2{
+//            createTheRoute(startCoord: annotationArray[index].coordinate, destinationCoord: annotationArray[index + 1].coordinate)
+//        }
+//        mapView.showAnnotations(annotationArray, animated: true)
+//    }
     @objc func resetButtonTapped(){
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
@@ -219,8 +193,7 @@ class ViewController: UIViewController {
                            options: .curveEaseInOut,
                            animations: {
                             self.mapView.frame.origin.y = self.mapView.frame.origin.y - 110
-                            //self.menuButton.setImage(#imageLiteral(resourceName: "down-chevron-458459.png"), for: .normal)
-            }) { (finished) in
+                           }) { (finished) in
                 
             }
         } else {
@@ -232,29 +205,19 @@ class ViewController: UIViewController {
                            options: .curveEaseInOut,
                            animations: {
                             self.mapView.frame.origin.y = 0
-                            //self.menuButton.setImage(#imageLiteral(resourceName: "up-chevron-458462.png"), for: .normal)
-            }) { (finished) in
-    
-//                self.menuViewController.willMove(toParent: nil)
-//                self.menuViewController.view.removeFromSuperview()
-//                self.menuViewController.removeFromParent()
-                //self.menuViewController.remove()
+                           }) { (finished) in
                 print("Удалили menuViewController")
             }
         }
     }
     
     func toggleMenu() {
-        
-        if !isMove {
-            //configureMenuViewController()
-        }
         isMove = !isMove
         showMenuViewController(shouldMove: isMove)
     }
     
     private func setupPlaceMark(placeAddress: String){
-//
+        //
         let localSearchRequest = MKLocalSearch.Request()
         localSearchRequest.naturalLanguageQuery = placeAddress
         let region = MKCoordinateRegion(center: currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -265,9 +228,9 @@ class ViewController: UIViewController {
             guard let firstMapItem = response.mapItems.first else { return }
             self.getDirections(to: firstMapItem)
             self.infoView.isHidden = false
+            self.resetButton.isHidden = false
         }
     }
-    //MARK:Some source code
     
     func getDirections(to destination: MKMapItem) {
         let sourcePlacemark = MKPlacemark(coordinate: currentCoordinate)
@@ -285,7 +248,7 @@ class ViewController: UIViewController {
             
             self.mapView.addOverlay(primaryRoute.polyline)
             
-        self.locationManager.monitoredRegions.forEach({ self.locationManager.stopMonitoring(for: $0) })
+            self.locationManager.monitoredRegions.forEach({ self.locationManager.stopMonitoring(for: $0) })
             
             self.steps = primaryRoute.steps
             for i in 0 ..< primaryRoute.steps.count {
@@ -299,18 +262,16 @@ class ViewController: UIViewController {
                 let circle = MKCircle(center: region.center, radius: region.radius)
                 self.mapView.addOverlay(circle)
             }
-
+            
             //let intZeroStepDistance = Int(self.steps[0].distance)
             let intFirstStepDistance = Int(self.steps[1].distance)
             
             let initialMessage = "через \(intFirstStepDistance) метров, \(self.steps[1].instructions)."
             self.directionsLabel.text = "\(intFirstStepDistance) m"
             print(self.steps[1].instructions)
-                //MARK: String split
-            var sent = self.steps[1].instructions
+            //MARK: String split
+            let sent = self.steps[1].instructions
             self.configureDirectionimage(sent: sent)
-            print(words[1])
-            
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
             self.speechSynthesizer.accessibilityLanguage = "ru-RU"
             self.speechSynthesizer.speak(speechUtterance)
@@ -320,56 +281,49 @@ class ViewController: UIViewController {
     }
     
     private func configureDirectionimage(sent: String){
-        var words = sent.split(separator: " ")
-        var directionWord = words[1]
-        var direcyionWordRe = words[0]
+        let words = sent.split(separator: " ")
+        let directionWord = words[1]
+        let direcyionWordRe = words[0]
         if directionWord == "направо"{
             self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn right icon_4184680.png"), for: .normal)
         } else if directionWord == "налево"{
             self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
         } else if direcyionWordRe == "Развернитесь"{
             self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector u-turn icon_4190813.png"), for: .normal)
-            
         }
     }
     
-    private func createTheRoute(startCoord: CLLocationCoordinate2D, destinationCoord: CLLocationCoordinate2D){
-        
-        let startLocation = MKPlacemark(coordinate: startCoord)
-        let destinateLocation = MKPlacemark(coordinate: destinationCoord)
-        
-        let request = MKDirections.Request()
-        request.source = MKMapItem(placemark: startLocation)
-        request.destination = MKMapItem(placemark: destinateLocation)
-        
-        request.transportType = .walking
-        request.requestsAlternateRoutes = true
-        
-        let direction = MKDirections(request: request)
-        direction.calculate { (response, error) in
-            if let error = error {
-                print(error)
-                return
-                
-            }
-            
-            guard let response = response else {
-                self.errorAlert(title: "Error", message:" Unable to create the route")
-                return
-            }
-            var minRoute = response.routes[0]
-            for route in response.routes{
-                minRoute = (route.distance < minRoute.distance) ? route : minRoute
-            }
-            self.mapView.addOverlay(minRoute.polyline)
-        }
-        
-    }
-    
-   
-    
-  
-
+//    private func createTheRoute(startCoord: CLLocationCoordinate2D, destinationCoord: CLLocationCoordinate2D){
+//
+//        let startLocation = MKPlacemark(coordinate: startCoord)
+//        let destinateLocation = MKPlacemark(coordinate: destinationCoord)
+//
+//        let request = MKDirections.Request()
+//        request.source = MKMapItem(placemark: startLocation)
+//        request.destination = MKMapItem(placemark: destinateLocation)
+//
+//        request.transportType = .walking
+//        request.requestsAlternateRoutes = true
+//
+//        let direction = MKDirections(request: request)
+//        direction.calculate { (response, error) in
+//            if let error = error {
+//                print(error)
+//                return
+//            }
+//
+//            guard let response = response else {
+//                self.errorAlert(title: "Error", message:" Unable to create the route")
+//                return
+//            }
+//            var minRoute = response.routes[0]
+//            for route in response.routes{
+//                minRoute = (route.distance < minRoute.distance) ? route : minRoute
+//            }
+//            self.mapView.addOverlay(minRoute.polyline)
+//        }
+//    }
+//
 }
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -387,7 +341,7 @@ extension ViewController: CLLocationManagerDelegate {
             let intStepDistance = Int(currentStep.distance)
             let message = "Через \(intStepDistance) метров, \(currentStep.instructions)"
             directionsLabel.text = "\(intStepDistance) m"
-            var sent = self.steps[stepCounter].instructions
+            let sent = self.steps[stepCounter].instructions
             configureDirectionimage(sent: sent)
             
             let speechUtterance = AVSpeechUtterance(string: message)
@@ -406,18 +360,6 @@ extension ViewController: CLLocationManagerDelegate {
 }
 
 extension ViewController: MKMapViewDelegate{
-//    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-//        let rendered = MKPolylineRenderer(overlay: overlay as! MKPolyline)
-//        rendered.strokeColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-//        return rendered
-//    }
-//    if overlay is MKCircle {
-//        let renderer = MKCircleRenderer(overlay: overlay)
-//        renderer.strokeColor = .red
-//        renderer.fillColor = .red
-//        renderer.alpha = 0.5
-//        return renderer
-//    }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let renderer = MKPolylineRenderer(overlay: overlay)
@@ -440,26 +382,12 @@ extension ViewController{
     
     func setConstraints(){
         
-//        view.insertSubview(infoView, at: 0)
-//        NSLayoutConstraint.activate([
-//            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-//            infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-//            infoView.widthAnchor.constraint(equalToConstant: 200),
-//            infoView.heightAnchor.constraint(equalToConstant: 70)
-//            
-//            
-//            
-//        ])
-        
         view.insertSubview(infoView, at: 1)
         NSLayoutConstraint.activate([
             infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             infoView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             infoView.widthAnchor.constraint(equalToConstant: 160),
             infoView.heightAnchor.constraint(equalToConstant: 70)
-            
-            
-            
         ])
         view.insertSubview(mapView, at: 0)
         NSLayoutConstraint.activate([
@@ -471,7 +399,7 @@ extension ViewController{
         
         infoView.insertSubview(directionsLabel, at: 0)
         NSLayoutConstraint.activate([
-
+            
             directionsLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 25),
             directionsLabel.centerYAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 0),
             //directionsLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -10),
@@ -488,7 +416,7 @@ extension ViewController{
             
             
         ])
-        //MARK:Location
+        
         view.insertSubview(currentLocationButton, at: 0)
         NSLayoutConstraint.activate([
             currentLocationButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor,constant: -20),
@@ -527,8 +455,6 @@ extension ViewController{
             indicationButton.centerYAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 0),
             indicationButton.heightAnchor.constraint(equalToConstant: 60),
             indicationButton.widthAnchor.constraint(equalToConstant: 60)
-            
-            
         ])
     }
     
