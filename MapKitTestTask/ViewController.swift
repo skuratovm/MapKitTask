@@ -308,13 +308,7 @@ class ViewController: UIViewController {
             print(self.steps[1].instructions)
                 //MARK: String split
             var sent = self.steps[1].instructions
-            var words = sent.split(separator: " ")
-            var directionWord = words[1]
-            if directionWord == "направо"{
-                self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn right icon_4184680.png"), for: .normal)
-            } else if directionWord == "налево"{
-                self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
-            }
+            self.configureDirectionimage(sent: sent)
             print(words[1])
             
             let speechUtterance = AVSpeechUtterance(string: initialMessage)
@@ -322,6 +316,20 @@ class ViewController: UIViewController {
             self.speechSynthesizer.speak(speechUtterance)
             
             self.stepCounter += 1
+        }
+    }
+    
+    private func configureDirectionimage(sent: String){
+        var words = sent.split(separator: " ")
+        var directionWord = words[1]
+        var direcyionWordRe = words[0]
+        if directionWord == "направо"{
+            self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn right icon_4184680.png"), for: .normal)
+        } else if directionWord == "налево"{
+            self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector turn left icon_4184711.png"), for: .normal)
+        } else if direcyionWordRe == "Развернитесь"{
+            self.indicationButton.setImage(#imageLiteral(resourceName: "—Pngtree—vector u-turn icon_4190813.png"), for: .normal)
+            
         }
     }
     
@@ -379,11 +387,15 @@ extension ViewController: CLLocationManagerDelegate {
             let intStepDistance = Int(currentStep.distance)
             let message = "Через \(intStepDistance) метров, \(currentStep.instructions)"
             directionsLabel.text = "\(intStepDistance) m"
+            var sent = self.steps[stepCounter].instructions
+            configureDirectionimage(sent: sent)
+            
             let speechUtterance = AVSpeechUtterance(string: message)
             speechSynthesizer.speak(speechUtterance)
         } else {
             let message = "Вы прибыли"
-            directionsLabel.text = message
+            directionsLabel.text = " Прибыли"
+            indicationButton.setImage(#imageLiteral(resourceName: "2334378-200.png"), for: .normal)
             let speechUtterance = AVSpeechUtterance(string: message)
             speechSynthesizer.speak(speechUtterance)
             stepCounter = 0

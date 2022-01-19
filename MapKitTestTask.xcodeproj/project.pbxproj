@@ -16,6 +16,9 @@
 		40399FBB2797749F00AD572B /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FBA2797749F00AD572B /* location.png */; };
 		40399FBE2797805B00AD572B /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FBD2797805B00AD572B /* close.png */; };
 		40399FC12798015400AD572B /* —Pngtree—vector turn right icon_4184680.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FC02798015400AD572B /* —Pngtree—vector turn right icon_4184680.png */; };
+		40399FC4279810F100AD572B /* 1353132.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FC3279810F100AD572B /* 1353132.png */; };
+		40399FC7279817A000AD572B /* 2334378-200.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FC6279817A000AD572B /* 2334378-200.png */; };
+		40399FCA2798197400AD572B /* —Pngtree—vector u-turn icon_4190813.png in Resources */ = {isa = PBXBuildFile; fileRef = 40399FC92798197400AD572B /* —Pngtree—vector u-turn icon_4190813.png */; };
 		40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD127961BC10039DD51 /* down-chevron-458459.png */; };
 		40834BD627961BC10039DD51 /* route-2459472-2139747.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD227961BC10039DD51 /* route-2459472-2139747.png */; };
 		40834BD727961BC10039DD51 /* point-1984772-1677550.png in Resources */ = {isa = PBXBuildFile; fileRef = 40834BD327961BC10039DD51 /* point-1984772-1677550.png */; };
@@ -39,6 +42,9 @@
 		40399FBA2797749F00AD572B /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = ../../../Downloads/location.png; sourceTree = "<group>"; };
 		40399FBD2797805B00AD572B /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = ../../../Downloads/close.png; sourceTree = "<group>"; };
 		40399FC02798015400AD572B /* —Pngtree—vector turn right icon_4184680.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "—Pngtree—vector turn right icon_4184680.png"; path = "../../../Downloads/—Pngtree—vector turn right icon_4184680.png"; sourceTree = "<group>"; };
+		40399FC3279810F100AD572B /* 1353132.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1353132.png; path = ../../../Downloads/1353132.png; sourceTree = "<group>"; };
+		40399FC6279817A000AD572B /* 2334378-200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "2334378-200.png"; path = "../../../Downloads/2334378-200.png"; sourceTree = "<group>"; };
+		40399FC92798197400AD572B /* —Pngtree—vector u-turn icon_4190813.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "—Pngtree—vector u-turn icon_4190813.png"; path = "../../../Downloads/—Pngtree—vector u-turn icon_4190813.png"; sourceTree = "<group>"; };
 		40834BD127961BC10039DD51 /* down-chevron-458459.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-chevron-458459.png"; path = "../../../../Downloads/down-chevron-458459.png"; sourceTree = "<group>"; };
 		40834BD227961BC10039DD51 /* route-2459472-2139747.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "route-2459472-2139747.png"; path = "../../../../Downloads/route-2459472-2139747.png"; sourceTree = "<group>"; };
 		40834BD327961BC10039DD51 /* point-1984772-1677550.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "point-1984772-1677550.png"; path = "../../../../Downloads/point-1984772-1677550.png"; sourceTree = "<group>"; };
@@ -95,6 +101,9 @@
 		40FE2BFE2711957400DAEB99 /* MapKitTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				40399FC92798197400AD572B /* —Pngtree—vector u-turn icon_4190813.png */,
+				40399FC6279817A000AD572B /* 2334378-200.png */,
+				40399FC3279810F100AD572B /* 1353132.png */,
 				40399FC02798015400AD572B /* —Pngtree—vector turn right icon_4184680.png */,
 				40399FBD2797805B00AD572B /* close.png */,
 				40399FBA2797749F00AD572B /* location.png */,
@@ -175,13 +184,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				40834BD727961BC10039DD51 /* point-1984772-1677550.png in Resources */,
+				40399FC4279810F100AD572B /* 1353132.png in Resources */,
 				40399FB527973BB700AD572B /* dots-three-outline.png in Resources */,
 				40D5F5DB2797004B0065DFF9 /* Vector-Search.png in Resources */,
 				40399FBE2797805B00AD572B /* close.png in Resources */,
 				40FE2C0C2711957500DAEB99 /* LaunchScreen.storyboard in Resources */,
 				40399FBB2797749F00AD572B /* location.png in Resources */,
+				40399FC7279817A000AD572B /* 2334378-200.png in Resources */,
 				40399FB22797399000AD572B /* —Pngtree—vector turn left icon_4184711.png in Resources */,
 				40399FB827973CD200AD572B /* 5684692.png in Resources */,
+				40399FCA2798197400AD572B /* —Pngtree—vector u-turn icon_4190813.png in Resources */,
 				40399FA927970E7C00AD572B /* turn-right-arrow.png in Resources */,
 				40834BD527961BC10039DD51 /* down-chevron-458459.png in Resources */,
 				40834BD827961BC10039DD51 /* up-chevron-458462.png in Resources */,
